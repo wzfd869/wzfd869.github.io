@@ -1,77 +1,49 @@
-<%
-Dim objBC
-Set objBC=Server.CreateObject("MSWC.BrowserType")
-%>
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312"><style>
-.blue{font-size: 12px; color: #000080}
-.red {font-size: 12px; color: #D00000}
-</style><title>提取与 ASP 相关的服务器或客户端的一些信息</title></head>
+package com.autu.common.kit;
 
-<body bgcolor=#85a3ff>
-<center><span style="width: 760;font-size:28px;color:#f0f000;font-family:华文新魏;
-position:relative;filter:glow(color=#0060b0, strength=5)">
-提取与 ASP 相关的服务器或客户端的一些信息</span></center>
-<table border=1 cellSpacing=1 cellPadding=2 align=center width=710
-bordercolorlight="#ACDFCC" bordercolordark="#600000" bgcolor=#ffffff>
-<tr><td colspan=5 class=12 align=right bgcolor=#85a3ff>梅花雨    </td></tr>
-<tr><td class=blue width=140>目前网页虚拟路径：</td>
-<td class=red width=177>  <%= Request.ServerVariables("path_info") %></td>
-<td width=10 rowspan=8 bgcolor=#85a3ff></td>
-<td class=blue width=130>本网页的实际路径：</td>
-<td class=red width=243>  <%= Request.ServerVariables("path_Translated") %></td></tr>
-<tr><td class=blue>服务器端的IP地址：</td>
-<td class=red>  <%= Request.ServerVariables("local_addr") %></td>
-<td class=blue>服务器软件的版本：</td>
-<td class=red>  <%= Request.ServerVariables("server_software") %></td>
-<tr><td class=blue>服务器连接口编号：</td>
-<td class=red>  <%= Request.ServerVariables("server_port") %></td>
-<td class=blue>服务器的HTTP版本：</td>
-<td class=red>  <%= Request.ServerVariables("server_Protocol") %></td></tr>
-<tr><td class=blue>远程主机的名称：</td>
-<td class=red>  <%= Request.ServerVariables("remote_host") %></td>
-<td class=blue>远程主机的IP地址：</td>
-<td class=red>  <%= Request.ServerVariables("remote_addr") %></td></tr>
-<tr><td class=blue>服务器的名称或IP：</td>
-<td class=red>  <%= Request.ServerVariables("server_name") %></td>
-<td class=blue>描述内容的语系：</td>
-<td class=red>  <%= Request.ServerVariables("http_accept_language") %></td></tr>
-<tr><td class=blue>站点主目录的位置：</td>
-<td class=red>  <%= Server.MapPath("/") %></td>
-<td class=blue>本网页所在位置：</td>
-<td class=red>  <%= Server.MapPath("./") %></td></tr>
-<tr><td class=blue>本网页上一级目录：</td>
-<td class=red>  <%= Server.MapPath("../") %></td>
-<td class=blue>服务器端CGI版本：</td>
-<td class=red>  <%= Request.ServerVariables("gateway_interface") %></td></tr>
-<tr><td class=blue>子与母端联机类型：</td>
-<td class=red>  <%= Request.ServerVariables("http_connection") %></td>
-<td class=blue>浏览器端主机名：</td>
-<td class=red>  <%= Request.ServerVariables("http_host") %></td></tr>
-<tr><td class=blue>浏览器端相关信息：</td>
-<td class=red colspan=4>  <%= Request.ServerVariables("http_user_agent") %></td></tr>
-<tr><td class=blue>用户浏览器的名称：</td>
-<td class=red>  <% = objBC.Browser %></td>
-<td width=10 rowspan=5 bgcolor=#85a3ff></td>
-<td class=blue>用户浏览器的版本：</td>
-<td class=red>  <% = objBC.Version %></td></tr>
-<tr><td class=blue>是否BETA测试软件：</td>
-<td class=red>  <% = objBC.Beta %></td>
-<td class=blue>ActiveXControls：</td>
-<td class=red>  <% = objBC.ActiveXControls %></td></tr>
-<tr><td class=blue>是否支持背景声音：</td>
-<td class=red>  <% = objBC.BackgroundSounds %></td>
-<td class=blue>是否支持 Cookies：</td>
-<td class=red>  <% = objBC.Cookies %></td></tr>
-<tr><td class=blue>是否支持框架网页：</td>
-<td class=red>  <% = objBC.Frames %></td>
-<td class=blue>是否支持表格网页：</td>
-<td class=red>  <% = objBC.Tables %></td></tr>
-<tr><td class=blue>支持 JavaScript：</td>
-<td class=red>  <% = objBC.JavaScript %></td>
-<td class=blue>是否支持VBScript：</td>
-<td class=red>  <% = objBC.VBScript %></td></tr>
-</table>
-<% Set objBC=Nothing %>
-</body>
-</html>
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletRequest;
+
+public class AgentUserKit {
+	private static String pattern = "^Mozilla/\\d\\.\\d\\s+\\(+.+?\\)";
+	private static String pattern2 = "\\(+.+?\\)";
+	private static Pattern r = Pattern.compile(pattern);
+	private static Pattern r2 = Pattern.compile(pattern2);
+
+	public static String getDeviceInfo(HttpServletRequest request) {
+		String userAgent = request.getHeader("User-Agent");
+		return getDeviceInfo(userAgent);
+	}
+
+	private static String getDeviceInfo(String userAgent) {
+		Matcher m = r.matcher(userAgent);
+		String result = null;
+		if (m.find()) {
+			result = m.group(0);
+		}
+
+		Matcher m2 = r2.matcher(result);
+		if (m2.find()) {
+			result = m2.group(0);
+		}
+		result = result.replace("(", "");
+		result = result.replace(")", "");
+		return filterDeviceInfo(result);
+	}
+
+	public static String filterDeviceInfo(String result) {
+		if (StrKit.isBlank(result)) {
+			return null;
+		}
+		result = result.replace(" U;", "");
+		result = result.replace(" zh-cn;", "");
+		return result;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(getDeviceInfo(
+				"Mozilla/5.0 (Linux; U; Android 7.0; zh-cn; MI 5s Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/61.0.3163.128 Mobile Safari/537.36 XiaoMi/MiuiBrowser/10.2.2"));
+	}
+
+}

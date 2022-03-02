@@ -1,24 +1,16 @@
-<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-
-<%@ page import="java.util.*"%>
-<%@ page import="java.text.*"%>
-
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>JSP</title>
-</head>
-<body>
-    <%
-        // 获取IP
-        String ip = request.getRemoteAddr();
+<html lang="zh-CN">
 
-        // 获取时间
-        String data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
-    %>
-    <%-- 使用表达式语言进行输出 --%>
-    <h2>您的IP地址为：<%=ip%></h2>
-    <h2>本次访问时间：<%=data%></h2>
-</body>
+<head>
+	<meta charset="utf-8" />
+	<meta name="renderer" content="webkit" />
+	<meta name="viewport" content="width=device-width" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>热铁盒检查</title>
+	<base target="_blank" />
+	<link rel="canonical" href="https://check.retiehe.com/" />
+	<link rel="stylesheet" href="https://www.retiehe.com/css/check.css" />
+	<link rel="shortcut icon" href="https://assets.retiehe.com/rth-icon-192.png" />
+	<link rel="apple-touch-icon" href="https://assets.retiehe.com/rth-icon-512.png" />
+</head>
 </html>

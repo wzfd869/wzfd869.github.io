@@ -5,24 +5,37 @@
 <meta charset="UTF-8">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link rel="icon" href="https://wzfd869.github.io/video.ico">
-<title>-INFORMATION-</title>
+<title>-INFORMATION-</t>
+    <meta name="viewport"content="width=device-width, initial-scale=1.0">
 
-<body></p>
+    <script>
 
-<p align="center"><font face="FZYBXSK.TTF" size="7"><b><i>INFO</i></b></font><b><font face="FZYBXSK.TTF" size="4" color="#C0C0C0">（由<i><font color="#C0C0C0"><span style="text-decoration: none"><a href="/index.html"><span style="text-decoration: none"><font color="#C0C0C0">wzfd</font></span></a></span></font></a></i>提供）</font></b></p>
+        //查看访问浏览器的信息
 
-<body>
-<script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8" charset="utf-8"></script>
-        <script type="text/javascript">
-            var i=returnCitySN;
-            document.write('您的IP<u>' + i['cip'] + '</u>归属地为<u>' + i['cname'] + '</u>');
-        </script>
-</body>
+       txt="<p>浏览器代号:"+navigator.appCodeName+"</p>";
 
+       txt+="<p>浏览器名称:"+navigator.appName+"</p>";
 
-<p align="center"><font face="FZYBXSK.TTF" size="6"><a style="color: #8A8A8A; text-decoration: none; border: 2px dashed #808080; background-color: #FFFFFF" href="index.html">
-返回首页</a></font></font></p>
+       txt+="<p>浏览器版本:"+navigator.appVersion+"</p>";
 
+       txt+="<p>启用Cookies:"+nvaigator.cookieEnabled+"</p>";
+
+       txt+="<p>硬件平台:"+navigator.platform+"</p>";
+
+       txt+="<p>用户代理:"+navigator.userAgent+"</p>";
+
+       txt+="<p>用户代理语言:"+navigator.systemLanguage+"</p>";
+
+       document.getElementById("demo").innerHTML=txt;
+
+    </script>
+
+    </head>
+
+    <body>
+
+    <div id="demo"></div>
+
+    </body>
 
 </html>
-

@@ -12,22 +12,11 @@
 <p align="center"><font face="FZYBXSK.TTF" size="7"><b><i>INFO</i></b></font><b><font face="FZYBXSK.TTF" size="4" color="#C0C0C0">（由<i><font color="#C0C0C0"><span style="text-decoration: none"><a href="/index.html"><span style="text-decoration: none"><font color="#C0C0C0">wzfd</font></span></a></span></font></a></i>提供）</font></b></p>
 
 <body>
-<script type="text/javascript">
-var area = "";
-try
-{
-if(geoip_city() != "" && geoip_city() != null)
-area += geoip_city()+", ";
-if(geoip_region_name() != "" && geoip_region_name() != null)
-area += geoip_region_name()+", ";
-if(geoip_country_name() != "" && geoip_country_name() != null)
-area += geoip_country_name();
-}
-catch(err)
-{
-area="";
-}
-</script>
+<script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8" charset="utf-8"></script>
+        <script type="text/javascript">
+            var i=returnCitySN;
+            document.write('您的IP<u>' + i['cip'] + '</u>归属地为<u>' + i['cname'] + '</u>');
+        </script>
 </body>
 
 

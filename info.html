@@ -13,93 +13,12 @@
 <p align="center"><font face="FZYBXSK.TTF" size="7"><b><i>INFO</i></b></font><b><font face="FZYBXSK.TTF" size="4" color="#C0C0C0">（由<i><font color="#C0C0C0"><span style="text-decoration: none"><a href="/index.html"><span style="text-decoration: none"><font color="#C0C0C0">wzfd</font></span></a></span></font></a></i>提供）</font></b></p>
 
 </body>
-public class IPController {
+ <script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8" charset="utf-8"></script>
+        <script type="text/javascript">
+            var i=returnCitySN;
+            document.write('您的IP<u>' + i['cip'] + '</u>归属地为<u>' + i['cname'] + '</u>');
+        </script>
 
-/***
-
-* 获取访问者真实ip地址
-
-* @param request
-
-* @return
-
-*/
-
-@GetMapping("getIpAddr")
-
-public String getClientIpAddr(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException { String ip = request.getHeader("X-Forwarded-For");
-
-if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-
-ip = request.getHeader("Proxy-Client-IP");
-
-}
-
-if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-
-ip = request.getHeader("WL-Proxy-Client-IP");
-
-}
-
-if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-
-ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-
-}
-
-if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-
-ip = request.getHeader("HTTP_X_FORWARDED");
-
-}
-
-if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-
-ip = request.getHeader("HTTP_X_CLUSTER_CLIENT_IP");
-
-}
-
-if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-
-ip = request.getHeader("HTTP_CLIENT_IP");
-
-}
-
-if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-
-ip = request.getHeader("HTTP_FORWARDED_FOR");
-
-}
-
-if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-
-ip = request.getHeader("HTTP_FORWARDED");
-
-}
-
-if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-
-ip = request.getHeader("HTTP_VIA");
-
-}
-
-if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-
-ip = request.getHeader("REMOTE_ADDR");
-
-}
-
-if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-
-ip = request.getRemoteAddr();
-
-}
-
-　　　　return ip;
-
-}
-
-}
 
 
 <p align="center"><font face="FZYBXSK.TTF" size="6"><a style="color: #8A8A8A; text-decoration: none; border: 2px dashed #808080; background-color: #FFFFFF" href="index.html">
